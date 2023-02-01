@@ -20,13 +20,13 @@ repo = 'itchyny/vim-cursorword'
 
 ########### comment ###########
 [[plugins]]
-repo = 'tpope/vim-commentary'
-[[plugins]]
 repo = 'tyru/caw.vim'
 
 ############ file ############
 [[plugins]]
-repo = 'preservim/nerdtree'
+repo = 'lambdalisue/fern.vim'
+[[plugins]]
+repo = 'yuki-yano/fern-preview.vim'
 
 ############ move ############
 [[plugins]]

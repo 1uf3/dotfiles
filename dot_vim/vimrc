@@ -217,3 +217,16 @@ vmap <Leader>c <Plug>(caw:zeropos:toggle)
 " open browser
 nmap gx <Plug>(openbrowser-smart-search)
 vmap gx <Plug>(openbrowser-smart-search)
+
+" Fern
+let g:fern#default_hidden=1
+nnoremap <Leader><Tab> :Fern . -reveal=% -drawer -toggle -width=40<CR>
+
+function! s:fern_settings() abort
+  nmap <silent> <buffer> p <Plug>(fern-action-preview:auto:toggle)
+endfunction
+
+augroup fern-settings
+  autocmd!
+  autocmd FileType fern call s:fern_settings()
+augroup END
