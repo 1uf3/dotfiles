@@ -155,6 +155,10 @@ export PATH=$GOPATH/bin:$PATH
 
 typeset -U path PATH
 
+### CARGOPATH
+export CARGOPATH=$HOME/.cargo
+export PATH=$CARGOPATH/bin:$PATH
+
 ### npm global path
 
 
