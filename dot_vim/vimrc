@@ -79,21 +79,30 @@ let g:tokyonight_current_word = 'bold'
 
 set encoding=utf-8
 set helplang=ja
-set number
+set number " show current absolute
+set relativenumber " Relative line numbers
 set wildmenu
 set wildmode=full
 set history=200
-set vb t_vb=
+set vb t_vb= " No beep sound
+set mouse=a " enable mouse usage in terminals
 
 "indent
 set smartindent
 set expandtab
-set tabstop=2
-set shiftwidth=2
+set tabstop=8
+set softtabstop=8
+set shiftwidth=8
 
 " search
 set incsearch
+set ignorecase
+set smartcase
 set hlsearch
+
+" splits
+set splitright
+set splitbelow
 
 let mapleader = "\<Space>"
 
@@ -111,6 +120,8 @@ endif
 inoremap <silent> jj <Esc>
 inoremap <silent> っｊ <Esc>
 inoremap <silent> ｊｊ <Esc>
+
+nnoremap ; :
 
 inoremap <expr><Tab> pumvisible() ? "\<C-n>" : MyInsCompl()
 function! MyInsCompl() abort
@@ -153,10 +164,14 @@ endif
 
 " lsp
 function! s:on_lsp_buffer_enabled() abort
+  if &buftype ==# 'nofile' || &filetype =~# '^\(quickrun\)' || getcmdwintype() ==# ':'
+    return
+  endif
   setlocal omnifunc=lsp#complete
   setlocal signcolumn=yes
   nmap <buffer> gd <plug>(lsp-definition)
   nmap <buffer> <C-]> <plug>(lsp-definition)
+  nmap <buffer> <c-k> <plug>(lsp-hover)
   nmap <buffer> <f2> <plug>(lsp-rename)
   nmap <buffer> <Leader>d <plug>(lsp-type-definition)
   nmap <buffer> gr <plug>(lsp-references)
@@ -164,8 +179,8 @@ function! s:on_lsp_buffer_enabled() abort
   inoremap <expr> <cr> pumvisible() ? "\<c-y>\<cr>" : "\<cr>"
 endfunction
 
-augroup lsp_install
-  au!
+augroup vimrc_lsp_install
+  autocmd!
   autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
 augroup END
 command! LspDebug let lsp_log_verbose=1 | let lsp_log_file = expand('~/lsp.log')
@@ -196,6 +211,14 @@ let g:lsp_settings['gopls'] = {
 \  },
 \}
 
+
+
+" rust
+let g:rustfmt_autosave = 1
+let g:rustfmt_emit_files = 1
+let g:rustfmt_fail_silently = 1
+let g:rust_clip_command = 'xclip -selection clipboard'
+
 " setting vim-airline
 set ttimeoutlen=10
 let g:airline_extensions = ['branch', 'fzf', 'tabline', 'searchcount', 'gina']
@@ -211,19 +234,22 @@ nnoremap <silent> <leader>l :BLines<CR>
 nnoremap <silent> <leader>h :History<CR>
 
 " cow vim
-nmap <Leader>c <Plug>(caw:zeropos:toggle)
-vmap <Leader>c <Plug>(caw:zeropos:toggle)
+nmap <leader>c <plug>(caw:zeropos:toggle)
+vmap <leader>c <plug>(caw:zeropos:toggle)
 
+" markdown preview
+let g:previm_enable_realtime =1
+nnoremap <silent> <leader>p :PreviewOpen<CR>
 " open browser
-nmap gx <Plug>(openbrowser-smart-search)
-vmap gx <Plug>(openbrowser-smart-search)
+nmap gx <plug>(openbrowser-smart-search)
+vmap gx <plug>(openbrowser-smart-search)
 
 " Fern
 let g:fern#default_hidden=1
-nnoremap <Leader><Tab> :Fern . -reveal=% -drawer -toggle -width=40<CR>
+nnoremap <leader><tab> :Fern . -reveal=% -drawer -toggle -width=20<CR>
 
 function! s:fern_settings() abort
-  nmap <silent> <buffer> p <Plug>(fern-action-preview:auto:toggle)
+  nmap <silent> <buffer> p <plug>(fern-action-preview:auto:toggle)
 endfunction
 
 augroup fern-settings
