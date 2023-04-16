@@ -12,7 +12,7 @@ paru -S chezmoi
 #### 2. Clone dotfiles
 
 ```
-chezmoi init https://github.com/lufeee/dotfiles.git
+chezmoi init https://github.com/1uf3/dotfiles.git
 ```
 
 #### 3. Apply dotfiles

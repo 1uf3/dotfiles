@@ -1,5 +1,25 @@
 [user]
-	name = lufeee
+	name = 1uf3
 	email = contact@lufe.jp
+[ui "color"]
+	ui = always
 [color]
 	ui = true
+[core]
+	autocrlf = input
+	safecrlf = true
+[merge]
+	tool = vim
+[alias]
+	c = commit
+	s = status
+	lg = log --online
+[pull]
+	ff = only
+[push]
+	default = simple
+[help]
+	autocorrect = 1
+[init]
+	defaultBranch = main
+
