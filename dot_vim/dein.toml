@@ -71,7 +71,7 @@ hook_add = '''
 
 ############# git #############
 [[plugins]]
-repo = 'lambdalisue/gina.vim'
+repo = 'lambdalisue/gin.vim'
 [[plugins]]
 repo = 'tpope/vim-fugitive'
 [[plugins]]
